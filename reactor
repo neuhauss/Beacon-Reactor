@@ -1,0 +1,18 @@
+2- criar o reactor 
+vim /etc/salt/master.d/reactor.conf
+
+reactor:
+  - salt/beacon/*/inotify//etc/important_file:
+    - /srv/reactor/revert.sls
+
+## atenção a primeira linha do reactor e a mesma da tag do item 3.1.2 -
+
+
+3- Criar arquivo para tratar as informações do item 3.1.2 , usando como argumento o state criado no primeiro passo.
+
+vim /srv/reactor/revert.sls
+revert-file:
+  local.state.apply:
+    - tgt: {{ data['id'] }}
+    - arg:
+      - maintain_important_file
