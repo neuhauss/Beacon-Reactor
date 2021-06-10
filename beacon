@@ -1,0 +1,7 @@
+vim /srv/salt/maintain_important_file.sls
+
+important_file:
+  file.managed:
+    - name: /etc/important_file
+    - contents: |
+        meu conteudo do arquivo 
